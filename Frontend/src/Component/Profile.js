@@ -24,8 +24,6 @@ const Profile = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/api/getStudent/${RollNo}`);
-        console.log('response=>', response);
-
         if (response.data.success) {
           setState((prevState) => ({
             ...prevState,
@@ -92,9 +90,6 @@ const Profile = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      console.log('response2=>', response);
-
       if (response.data.success) {
         setState((prevState) => ({
           ...prevState,
@@ -102,8 +97,8 @@ const Profile = () => {
           isEditing: false,
           profileData: {
             ...prevState.profileData,
-            image: response.data.studentRecord.image || '/default-profile.png',
-          },
+          }
+        
         }));
         dispatch(UpdateProfile(response.data.studentRecord));
       } else {
